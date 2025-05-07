@@ -14,7 +14,10 @@ phases:
       - echo "Synthesizing the CDK app..."
       - npx cdk synth
       - echo "Deploying the stack..."
-      - npx cdk deploy --require-approval never
+      - npx cdk deploy CdkProjectStack --require-approval never
+
+      
+
 
 artifacts:
   files:
