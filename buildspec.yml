@@ -7,7 +7,6 @@ phases:
     commands:
       - echo "Installing system dependencies..."
       - python -m ensurepip --upgrade
-      - pip install --upgrade pip
       - pip install -r requirements.txt
       - pip install aws-cdk-lib constructs
       

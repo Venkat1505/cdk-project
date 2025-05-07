@@ -1,19 +1,18 @@
-from aws_cdk import (
-    # Duration,
-    Stack,
-    # aws_sqs as sqs,
-)
+from aws_cdk import Stack
 from constructs import Construct
+from .s3_construct import S3Construct
+from .ec2_construct import EC2Construct
+from .lambda_construct import LambdaConstruct
 
 class CdkProjectStack(Stack):
+    def __init__(self, scope: Construct, id: str, **kwargs):
+        super().__init__(scope, id, **kwargs)
 
-    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
-        super().__init__(scope, construct_id, **kwargs)
+        # Add S3 Construct
+        S3Construct(self, "S3Construct")
 
-        # The code that defines your stack goes here
+        # Add EC2 Construct
+        EC2Construct(self, "EC2Construct")
 
-        # example resource
-        # queue = sqs.Queue(
-        #     self, "CdkProjectQueue",
-        #     visibility_timeout=Duration.seconds(300),
-        # )
+        # Add Lambda Construct
+        LambdaConstruct(self, "LambdaConstruct")
