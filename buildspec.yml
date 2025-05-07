@@ -3,25 +3,19 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      python: 3.9
+      python: 3.11
     commands:
-      - echo "Installing system dependencies..."
-      - python -m ensurepip --upgrade
+      - echo "Installing dependencies..."
       - pip install -r requirements.txt
       - pip install aws-cdk-lib constructs
-      
-  pre_build:
-    commands:
-      - echo "Setting up environment and validating the stack..."
-      - cdk bootstrap # Ensure the environment is bootstrapped
-      - cdk synth     # Synthesize the CloudFormation templates
 
   build:
     commands:
+      - echo "Synthesizing the CDK app..."
+      - npx cdk synth
       - echo "Deploying the stack..."
-      - cdk deploy --require-approval never
+      - npx cdk deploy --require-approval never
 
 artifacts:
   files:
-    - '**/*' # Include all files in the output for debugging purposes
-  discard-paths: yes
+    - '**/*'
